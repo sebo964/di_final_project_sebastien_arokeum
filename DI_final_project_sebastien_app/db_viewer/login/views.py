@@ -6,7 +6,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 import psycopg2
 from django.contrib import messages
-from .forms import DatabaseConnectionForm, DatabaseConnectionDeleteForm
+from .forms import DatabaseConnectionForm
 from .models import DatabaseConnection
 
 # Create your views here.
@@ -15,40 +15,28 @@ def error(request):
     return render(request, 'error.html')      
     
 @login_required
-def adminsuser(request):
-    # Get all database connections
+def AdminUserView(request):
+    # retrieve all database connections
     connections = DatabaseConnection.objects.all()
 
-    # Handle form submission for creating a new connection
-    if request.method == 'POST' and 'create-connection' in request.POST:
+    # check if the form has been submitted
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request
         form = DatabaseConnectionForm(request.POST)
+
+        # check whether the form is valid
         if form.is_valid():
-            form.save()
-            messages.success(request, 'New database connection created successfully!')
-            return redirect('database_connections')
+            # save the database connection
+            connection = form.save()
+            connection.save()
+            return redirect('admin_user')
     else:
+        # create a blank form
         form = DatabaseConnectionForm()
 
-    # Handle form submission for deleting a connection
-    if request.method == 'POST' and 'delete-connection' in request.POST:
-        delete_form = DatabaseConnectionDeleteForm(request.POST)
-        if delete_form.is_valid():
-            connection_id = request.POST.get('connection_id')
-            connection = get_object_or_404(DatabaseConnection, id=connection_id)
-            connection.delete()
-            messages.success(request, 'Database connection deleted successfully!')
-            return redirect('database_connections')
-    else:
-        delete_form = DatabaseConnectionDeleteForm()
+    # render the admin user view with the connections and form
+    return render(request, 'adminuser.html', {'connections': connections, 'form': form})
 
-    # Render the template with all database connections and forms
-    context = {
-        'connections': connections,
-        'form': form,
-        'delete_form': delete_form,
-    }
-    
-    return render(request, 'adminuser.html', context)
 
 @login_required
 def normaluser(request):

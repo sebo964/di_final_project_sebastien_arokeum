@@ -9,9 +9,3 @@ class DatabaseConnectionForm(forms.ModelForm):
         widgets = {
             'password': forms.PasswordInput(),
         }
-
-# Form to delete a database connection
-class DatabaseConnectionDeleteForm(forms.ModelForm):
-    class Meta:
-        model = DatabaseConnection
-        fields = []

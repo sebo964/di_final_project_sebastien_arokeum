@@ -6,7 +6,55 @@
 
 {% if current_user.is_authenticated and current_user.is_admin %}
 
-<h2> Welcome {{current_user.username}} you are an admin  </h2>
+  <h1>Database Connections</h1>
+
+     <h2>Create a New Connection</h2>
+  <form method="post" action="{% url 'create_connection' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+
+
+  {% if connections %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Host</th>
+          <th>Port</th>
+          <th>Database</th>
+          <th>Username</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for connection in connections %}
+          <tr>
+            <td>{{ connection.name }}</td>
+            <td>{{ connection.host }}</td>
+            <td>{{ connection.port }}</td>
+            <td>{{ connection.database }}</td>
+            <td>{{ connection.username }}</td>
+            <td>
+              <form method="post" action="{% url 'delete_connection' %}">
+                {% csrf_token %}
+                {{ delete_form.as_hidden }}
+                <input type="hidden" name="connection_id" value="{{ connection.id }}">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No database connections found.</p>
+  {% endif %}
+
+  <hr>
+
+ 
 
 {% else %}
 

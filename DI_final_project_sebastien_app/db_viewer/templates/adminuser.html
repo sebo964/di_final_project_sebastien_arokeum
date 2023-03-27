@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+<h1> This is page for admins </h1>
+
+{% if current_user.is_authenticated and current_user.is_admin %}
+
+<h2> Welcome {{current_user.username}} you are an admin  </h2>
+
+{% else %}
+
+<h2> You are not logged in as admin </h2>
+
+{% endif %}
+
+{% endblock content%}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1> Normal User view  <h1>
+
+{% if user.is_authenticated %}
+
+<h2> Welcome {{user.username}} </h2>
+
+{% else %}
+
+<h2> You are not authenticated </h2>
+
+{% endif %}
+
+{% endblock content%}

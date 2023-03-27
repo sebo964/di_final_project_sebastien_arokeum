@@ -1,0 +1,79 @@
+/* Global styles */
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+/* Navbar styles */
+nav {
+    position: relative;
+}
+
+nav a {
+    margin-left: 1rem;
+}
+
+/* Login form styles */
+form label {
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    transition: border-color 0.3s ease-in-out;
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.25);
+}
+
+form button[type="button"] {
+    display: inline-block;
+    background-color: #2196f3;
+    color: #fff;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+form button[type="button"]:hover {
+    background-color: #1976d2;
+}
+
+form a {
+    display: inline-block;
+    margin-left: 1rem;
+    color: #2196f3;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+form a:hover {
+    color: #0d47a1;
+}
+
+form p {
+    margin-top: 0.5rem;
+}
+
+/* Footer styles */
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}

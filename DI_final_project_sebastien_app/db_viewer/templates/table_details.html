@@ -1,0 +1,57 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1> Table Vuew <h1>
+
+{% if user.is_authenticated %}
+
+<div class="container text-center">
+      <h1 class="display-4 text-primary">Table Details </h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Table Name</h2>
+            <p>{{table.name}}</p>
+        </div>
+        <div class="col-md-4">
+            <h2>Table Description</h2>
+            <p>{{table.description}}</p>
+        </div>
+
+<table>
+  <thead>
+    <tr>
+      {% for column in my_dataframe.columns %}
+      <th>{{ column }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {{ my_dataframe|safe }}
+  </tbody>
+</table>
+
+
+
+
+{% else %}
+
+<h2> You are not authenticated </h2>
+
+{% endif %}
+
+{% endblock content%}
+
+{%block title %} Table Detail View {% endblock title %}
+
+{% block logout %}
+
+{% if user.is_authenticated %}  
+<a href="{% url 'logout' %}">Logout</a>  
+{% endif %}
+
+{% endblock logout %}

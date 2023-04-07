@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- card for each table  -->
+    {% if user.is_authenticated %}
+      <form method="POST" action="{% url 'table_details' %}" >
+        {% csrf_token %}
+        <div class="form-group">
+           <label for="table-chosen-input" class="form-label">Enter chosen database name:</label>
+          <input type="text" class="form-control" id="db-chosen-input" name="db_chosen">  
+           <label for="table-chosen-input" class="form-label">Enter chosen schema name:</label>
+          <input type="text" class="form-control" id="schema-chosen-input" name="schema_chosen">  
+          <label for="table-chosen-input" class="form-label">Enter chosen table name:</label>
+          <input type="text" class="form-control" id="table-chosen-input" name="table_chosen">  
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+      </form>
+
+  {% for table in dict_of_tables_and_headers %}
+     <div class="row">
+  <div class="col-sm-4 mb-4">
+    <div class="card h-100">
+      <div class="card-header">
+        {{table.name}}
+      </div>
+      <div class="card-body">
+        <ul>
+        {% for column in table.columns %}
+          <li>{{column.name}}</li>
+        {% endfor %}
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+    {% else %}
+
+    <div class="container text-center mt-4">
+      <h2 class="h4 my-4 text-muted">You are not authenticated</h2>
+    </div>
+
+    {% endif %}
+  
+{% endblock content%}
+
+{%block title %} DB Tables {% endblock title %}
+
+
+{% block logout %}
+
+{% if user.is_authenticated %}  
+<a href="{% url 'logout' %}">Logout</a>  
+{% endif %}
+
+{% endblock logout %}
+
+{% block adminview %}
+
+<a href="{% url 'db_management' %}">AdminView</a>
+
+{% endblock adminview %}

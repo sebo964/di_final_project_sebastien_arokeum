@@ -9,11 +9,26 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="../db_details/">Home</a>
                     </li>
+                   
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
                     </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{% block logout%}  {% endblock logout%}</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{% block adminview%}  {% endblock adminview%}</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{% block userview%}  {% endblock userview%}</a>
+                    </li>
+                    <li class="nav-item">
+
                 </ul>
             </div>
         </div>
